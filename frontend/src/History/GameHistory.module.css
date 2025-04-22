@@ -1,0 +1,189 @@
+.historyPage {
+    display: flex;
+    justify-content: center; /* Centraliza o historyContainer horizontalmente */
+    align-items: flex-start; /* Alinha o container ao topo */
+    min-height: 100vh;
+    background: linear-gradient(135deg, #6e8efb, #a777e3); /* Gradiente padrão */
+    padding: 40px 20px; /* Espaçamento geral da página */
+    box-sizing: border-box;
+    overflow-y: auto; /* Permite rolagem da página inteira se o container for muito alto */
+  }
+  
+  .historyContainer {
+    padding: 30px;
+    max-width: 1000px; /* Mantém a largura máxima */
+    width: 100%; /* Ocupa a largura disponível até o max-width */
+    /* margin: 40px auto; */ /* REMOVIDO - O .historyPage agora centraliza */
+    /* background-color: rgba(30, 30, 46, 0.9); */ /* REMOVIDO - Fundo agora é do .historyPage */
+    background-color: rgba(30, 30, 46, 0.85); /* Mantém um fundo escuro para o conteúdo */
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    color: #e0e0e0;
+    font-family: 'Arial', sans-serif;
+    box-sizing: border-box; /* Garante que padding não aumente o tamanho total */
+  }
+  
+  .title {
+    text-align: center;
+    margin-top: 0; /* Remove margem superior se existir */
+    margin-bottom: 30px;
+    color: #ffcc00;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5em;
+    text-shadow: 0 0 10px #ffcc00;
+  }
+  
+  .backButton {
+    display: block;
+    margin: -10px auto 25px auto;
+    padding: 10px 20px;
+    background-color: #4a4e69;
+    color: white;
+    border: 1px solid #9a8c98;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.9em;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .backButton:hover {
+    background-color: #6c757d;
+    transform: translateY(-1px);
+  }
+  
+  
+  .loading, .error, .noHistory {
+    text-align: center;
+    font-size: 1.2em;
+    margin-top: 40px;
+    color: #ccc;
+  }
+  
+  .error {
+    color: #e74c3c;
+  }
+  
+  .tableWrapper {
+    max-height: 60vh;
+    overflow-y: auto;
+    margin-top: 20px;
+    border: 1px solid #4a4e69;
+    border-radius: 8px;
+    scrollbar-width: thin;
+    scrollbar-color: #6c757d #2c2c54;
+  }
+  
+  .tableWrapper::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .tableWrapper::-webkit-scrollbar-track {
+    background: #2c2c54;
+    border-radius: 10px;
+  }
+  
+  .tableWrapper::-webkit-scrollbar-thumb {
+    background-color: #6c757d;
+    border-radius: 10px;
+    border: 2px solid #2c2c54;
+  }
+  
+  .historyTable {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .historyTable th, .historyTable td {
+    border: 1px solid #4a4e69;
+    padding: 12px 15px;
+    text-align: left;
+    white-space: nowrap;
+  }
+  
+  .historyTable thead th {
+    position: sticky;
+    top: 0;
+    background-color: #2c2c54;
+    z-index: 1;
+    color: #ffcc00;
+    font-weight: bold;
+    font-family: 'Orbitron', sans-serif;
+  }
+  
+  .historyTable tbody tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  .historyTable tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  @media (max-width: 768px) {
+    .historyPage {
+        padding: 20px 10px; /* Reduz padding lateral da página */
+        align-items: center; /* Centraliza verticalmente se o conteúdo for menor */
+    }
+    .historyContainer {
+      padding: 20px;
+      /* margin: 20px auto; */ /* Removido */
+    }
+    .title {
+      font-size: 2em;
+    }
+    .historyTable th, .historyTable td {
+      padding: 8px 10px;
+      font-size: 0.9em;
+    }
+    .backButton {
+       font-size: 0.8em;
+       padding: 8px 15px;
+    }
+    .tableWrapper {
+      max-height: 65vh;
+    }
+  }
+  
+  @media (max-width: 480px) {
+     .historyPage {
+        padding: 15px 5px;
+     }
+      .historyContainer {
+          max-width: 98%; /* Quase largura total */
+          /* margin: 10px auto; */ /* Removido */
+          padding: 15px;
+      }
+      .title {
+          font-size: 1.6em;
+          margin-bottom: 20px;
+      }
+     .historyTable th, .historyTable td {
+      padding: 6px 8px;
+      font-size: 0.8em;
+      white-space: normal; /* Permite quebra de linha em telas pequenas */
+    }
+     .backButton {
+       font-size: 0.7em;
+       padding: 6px 12px;
+       margin-bottom: 20px;
+    }
+    .tableWrapper {
+       max-height: 70vh;
+       border: none; /* Remove borda no wrapper em telas pequenas */
+    }
+    /* Garante que a tabela não tenha bordas duplas */
+    .historyTable th, .historyTable td {
+         border: none;
+         border-bottom: 1px solid #4a4e69; /* Apenas linha inferior */
+    }
+     .historyTable th {
+         border-bottom-width: 2px; /* Linha mais grossa para cabeçalho */
+     }
+     .historyTable tr td:first-child, .historyTable tr th:first-child {
+         padding-left: 5px; /* Menos padding lateral */
+     }
+      .historyTable tr td:last-child, .historyTable tr th:last-child {
+         padding-right: 5px; /* Menos padding lateral */
+     }
+  
+  }

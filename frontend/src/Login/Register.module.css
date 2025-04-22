@@ -1,36 +1,152 @@
+.registerPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Register container styling (similar ao login) */
 .container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 450px;
+  text-align: center;
+  color: #333;
+  box-sizing: border-box;
+}
+
+/* Title styling (similar ao login) */
+.title {
+  margin-bottom: 25px;
+  color: #4a4e69;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2em;
+}
+
+/* Form styling */
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Input group styling (similar ao login) */
+.inputGroup {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+/* Label styling (similar ao login) */
+.label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #555;
+}
+
+/* Input field styling (similar ao login) */
+.input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1em;
+  box-sizing: border-box;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input:focus {
+  border-color: #a777e3; /* Cor roxa do gradiente no foco */
+  box-shadow: 0 0 5px rgba(167, 119, 227, 0.5);
+  outline: none;
+}
+
+/* General button styling */
+.button {
+  width: 100%; /* Botões ocupam largura total por padrão aqui */
+  padding: 12px 15px;
+  margin-top: 15px; /* Espaçamento entre botões/elementos */
+  border-radius: 8px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 600;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+/* Register button styling (cor primária roxa) */
+.registerButton {
+  background-color: #a777e3;
+}
+
+.registerButton:hover {
+  background-color: #8e5cc7;
+}
+
+/* Back to Login button styling (cor secundária azul) */
+.backButton {
+  background-color: #6e8efb;
+}
+
+.backButton:hover {
+  background-color: #5a75e1;
+}
+
+/* Message styling */
+.message {
+  text-align: center;
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 0.9em;
+  font-weight: 500;
+}
+
+/* Success message specific style */
+.successMessage {
+  color: #27ae60; /* Verde para sucesso */
+  background-color: rgba(46, 204, 113, 0.1);
+}
+
+/* Error message specific style */
+.errorMessage {
+  color: #e74c3c; /* Vermelho para erro */
+  background-color: rgba(231, 76, 60, 0.1);
+}
+
+/* Responsive adjustments (similar ao login) */
+@media (max-width: 768px) {
+  .container {
+    padding: 25px 30px;
+    max-width: 90%;
   }
-  
-  h2 {
-    text-align: center;
+  .title {
+    font-size: 1.8em;
   }
-  
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 20px 25px;
+  }
+  .title {
+    font-size: 1.5em;
+  }
   .input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 4px;
-    border: 1px solid #ccc;
+    padding: 10px 12px;
   }
-  
   .button {
-    width: 100%;
-    padding: 10px 0;
-    border-radius: 4px;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    background-color: #007bff;
+    padding: 10px 12px;
+    font-size: 0.9em;
   }
-  
-  .message {
-    text-align: center;
-    margin-top: 10px;
-    color: green;
-  }
+}

@@ -41,9 +41,6 @@ html, body {
 
 
 
-/* Calm Mode button styling */
-
-
 
 /* Volume control */
 .volume-control {
@@ -360,4 +357,314 @@ input:checked + .slider:before {
     background: #6c757d;
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.3), 0 8px 16px rgba(0, 0, 0, 0.6);
     transform: scale(1.1);
+  }
+
+
+
+
+
+
+
+  .modal-close-button {
+    position: absolute;
+    top: 15px; /* Adjust positioning */
+    right: 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #ccc; /* Lighter color for less emphasis */
+    transition: color 0.2s;
+    padding: 5px; /* Add padding for easier clicking */
+  }
+  
+  .modal-close-button:hover {
+    color: #fff; /* White on hover */
+  }
+  
+  /* Modal Headings */
+  .modal-h2 {
+    font-family: "Orbitron", sans-serif;
+    color: #ffcc00;
+    text-shadow: 0 0 8px #ffcc00, 0 0 15px #ffaa00;
+    margin-bottom: 20px; /* Reduced margin */
+    font-size: 1.8em; /* Adjusted font size */
+    margin-top: 0; /* Remove top margin if close button pushes it down */
+  }
+  
+  .modal-h3 { /* Style for subheadings like Volume controls */
+    font-family: "Orbitron", sans-serif;
+    color: #e0e0e0; /* Slightly lighter than white */
+    font-size: 1.3em;
+    margin-bottom: 10px;
+    text-align: left; /* Align left for structure */
+    padding-left: 20px; /* Indent slightly */
+  }
+  
+  /* Specific styling for Calm Mode h2/h3 text */
+  .calm-mode-label {
+    color: #ffffff !important; /* Ensure white overrides other styles */
+    text-shadow: none !important;
+  }
+  
+  /* Volume Value Display */
+  .volume-value {
+    margin-left: 10px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.9em;
+    min-width: 40px; /* Ensure space for '100%' */
+    text-align: right;
+  }
+  
+  
+  /* Difficulty Selection Container */
+  .difficulty-selection {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Space between buttons */
+    margin-top: 25px; /* Space below the title */
+    margin-bottom: 30px; /* Space above the accept button */
+    flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+  }
+  
+  /* Difficulty Button Base Style */
+  .difficulty-button {
+    padding: 12px 25px; /* Adjusted padding */
+    font-family: "Press Start 2P", sans-serif;
+    font-size: 1em; /* Responsive font size */
+    color: #fff;
+    border: 2px solid #9a8c98;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s, box-shadow 0.3s, border-color 0.3s;
+    min-width: 110px; /* Minimum width */
+    text-align: center;
+  }
+  
+  /* Difficulty Button Hover */
+  .difficulty-button:hover {
+    transform: scale(1.05); /* Slightly larger on hover */
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+  }
+  
+  /* Difficulty Button Selected State (Default Theme) */
+  .difficulty-button.selected {
+    border-color: #ffcc00; /* Highlight border */
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #ffcc00, 0 0 30px #ffaa00; /* Stronger glow */
+    /* animation: difficultyFloating 2s infinite ease-in-out; Remove or adjust animation */
+  }
+  
+  /* Difficulty Button Selected State (Calm Theme) */
+  .difficulty-button.calm-selected {
+    border-color: #a6e0a6; /* Calm highlight border */
+    transform: scale(1.1);
+    box-shadow: 0 0 15px #a6e0a6, 0 0 25px #c1f0c1; /* Calm glow */
+    /* animation: difficultyFloatingCalm 2s infinite ease-in-out; Optional calm animation */
+  }
+  
+  /* Color Variants for Difficulty Buttons */
+  .difficulty-button.green {
+    background: linear-gradient(145deg, #5cb85c, #4cae4c); /* Green gradient */
+  }
+  .difficulty-button.green:hover {
+    background: linear-gradient(145deg, #4cae4c, #398439);
+  }
+  
+  .difficulty-button.yellow {
+    background: linear-gradient(145deg, #f0ad4e, #eea236); /* Yellow gradient */
+  }
+  .difficulty-button.yellow:hover {
+    background: linear-gradient(145deg, #eea236, #d58512);
+  }
+  
+  .difficulty-button.red {
+    background: linear-gradient(145deg, #d9534f, #d43f3a); /* Red gradient */
+  }
+  .difficulty-button.red:hover {
+    background: linear-gradient(145deg, #d43f3a, #c9302c);
+  }
+  
+  /* Play/Accept Button */
+  .play-button {
+    margin-top: 20px; /* Adjusted spacing */
+    padding: 12px 30px;
+    background: linear-gradient(145deg, #6e8efb, #5a75e1); /* Primary action color */
+    color: #fff;
+    font-family: "Press Start 2P", sans-serif;
+    font-size: 1.1em;
+    border: none; /* Removed border for a cleaner look */
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .play-button:hover:not(:disabled) { /* Apply hover only if not disabled */
+    background: linear-gradient(145deg, #5a75e1, #4a63c1);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+    transform: scale(1.05);
+  }
+  
+  /* Disabled state for Play/Accept button */
+  .play-button.disabled {
+    background: #999; /* Greyed out */
+    cursor: not-allowed; /* Indicate non-interactivity */
+    box-shadow: none;
+    transform: none;
+  }
+  .play-button.disabled:hover {
+     background: #999; /* Ensure hover doesn't change appearance */
+  }
+
+
+
+
+
+  .volume-control {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* ou space-between */
+    margin: 15px 0; /* Ajuste a margem */
+    gap: 10px; /* Espaço entre elementos */
+}
+
+.mute-button {
+    background: none;
+    border: none;
+    color: #ccc; /* Cor padrão do ícone */
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em; /* Ajuste o tamanho do ícone se necessário */
+    transition: color 0.2s;
+}
+
+.mute-button:hover {
+    color: #fff; /* Cor ao passar o mouse */
+}
+
+.volume-icon {
+    /* Remova ou ajuste se estiver usando o botão */
+    /* font-size: 40px; */
+    /* margin-right: 15px; */
+}
+
+.volume-slider {
+    width: 180px; /* Ajuste a largura conforme necessário */
+    /* ... (outros estilos do slider) ... */
+}
+
+.volume-slider:disabled {
+    opacity: 0.5; /* Estilo para slider desabilitado */
+    cursor: not-allowed;
+}
+
+
+.volume-value {
+    margin-left: 10px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.9em;
+    min-width: 55px; /* Espaço para 'Muted' ou '100%' */
+    text-align: right;
+    color: #e0e0e0;
+}
+
+
+.wallet-status-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 20; /* Garante que fique acima do fundo */
+  }
+  
+  /* Estilo do Botão de Conectar */
+  .connect-wallet-button {
+    padding: 10px 18px;
+    font-family: "Press Start 2P", sans-serif;
+    font-size: 0.8em; /* Um pouco menor que os botões principais */
+    color: #ffffff;
+    background: linear-gradient(90deg, #00d9ff, #4a4e69); /* Gradiente azul/roxo */
+    border: 2px solid #9a8c98;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.3s, background 0.3s;
+    display: flex; /* Para alinhar ícone e texto */
+    align-items: center;
+  }
+  
+  .connect-wallet-button:hover {
+    background: linear-gradient(90deg, #00aaff, #6c757d);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+    transform: scale(1.05);
+  }
+  
+  /* Estilo para Exibir Endereço Conectado */
+  .wallet-connected {
+    padding: 10px 18px;
+    font-family: "Press Start 2P", sans-serif;
+    font-size: 0.8em;
+    color: #e0e0e0; /* Cor de texto clara */
+    background-color: rgba(44, 44, 84, 0.8); /* Fundo semi-transparente */
+    border: 2px solid #00d9ff; /* Borda azul brilhante */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+  }
+  
+  .wallet-connected span {
+      margin-left: 5px; /* Espaço após o ícone */
+  }
+
+
+  .top-right-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 20;
+    display: flex; /* Alinha itens lado a lado */
+    align-items: center;
+    gap: 15px; /* Espaço entre o status da carteira e o botão logout */
+  }
+  
+  /* Estilo do Botão de Logout */
+  .logout-button {
+    padding: 8px; /* Padding menor para um botão de ícone */
+    background-color: rgba(211, 77, 79, 0.8); /* Vermelho translúcido */
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%; /* Torna o botão redondo */
+    cursor: pointer;
+    display: flex; /* Centraliza o ícone */
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+  }
+  
+  .logout-button:hover {
+    background-color: rgba(231, 76, 60, 1); /* Vermelho mais forte no hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    transform: scale(1.1); /* Leve aumento no hover */
+  }
+
+
+  .top-left-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 20;
+  }
+  
+  .top-right-container {
+    position: absolute;
+    top: 20px;
+    right: 20px; /* Mantém a posição direita */
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    gap: 15px;
   }

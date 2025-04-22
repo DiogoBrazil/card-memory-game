@@ -2,11 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
 import { styled } from "@mui/system";
-import background from "../assets/images/celebration.gif"; // Background image
-import bgMusic from "../assets/audio/celebrate.mp3"; // Background music file
-import congratulationImage from "../assets/images/congrats2.png"; // Path to your congratulation image
+import background from "../assets/images/celebration.gif"; // Keep relative path for assets handled by Vite build
+// Correct the path for the audio file to be absolute from the public root
+import bgMusicPath from "../../public/audio/Solar2.mp3"; // Use absolute path
+import congratulationImage from "../../public/images/Galaxies.jpg"; // Use absolute path
 
-// Styled Components
+// Styled Components (remain the same)
 const PixelBox = styled(Box)(({ theme }) => ({
   height: "100vh",
   width: "100vw",
@@ -14,7 +15,7 @@ const PixelBox = styled(Box)(({ theme }) => ({
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  backgroundImage: `url(${background})`,
+  backgroundImage: `url(${background})`, // This should work if background is handled by build
   backgroundSize: "cover",
   backgroundPosition: "center",
   backgroundRepeat: "no-repeat",
@@ -23,7 +24,7 @@ const PixelBox = styled(Box)(({ theme }) => ({
 }));
 
 const ImageContainer = styled(Box)(() => ({
-  position: "relative", 
+  position: "relative",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
@@ -68,43 +69,53 @@ const PixelButton = styled(Box)(({ theme }) => ({
 const Congtnormal = () => {
   const navigate = useNavigate();
   const audioRef = useRef(null);
-  const [bgVolume, setBgVolume] = useState(
-    parseInt(localStorage.getItem("bgVolume"), 10) || 0
+   const [bgVolume, setBgVolume] = useState(
+    parseInt(localStorage.getItem("bgVolume"), 10) || 50 // Default to 50 if not set
   );
+  const [musicStarted, setMusicStarted] = useState(false);
 
   // Audio setup
   useEffect(() => {
-    // Initialize audio object
-    audioRef.current = new Audio(bgMusic);
+    // Initialize audio object using the correct path
+    audioRef.current = new Audio(bgMusicPath); // Use the imported path
     const audio = audioRef.current;
     audio.loop = true;
     audio.volume = bgVolume / 100;
 
+    // Autoplay logic (requires user interaction first)
     const handleClick = () => {
-      audio.play().catch((error) =>
-        console.error("Background music playback failed:", error)
-      );
-      document.removeEventListener("click", handleClick);
+      if (!musicStarted) {
+        audio.play().catch((error) =>
+          console.error("Background music playback failed:", error)
+        );
+        setMusicStarted(true);
+        document.removeEventListener("click", handleClick); // Remove listener after first play
+      }
     };
 
-    document.addEventListener("click", handleClick);
+    document.addEventListener("click", handleClick, { once: true }); // Listen for first click anywhere
 
     return () => {
       // Cleanup
-      audio.pause();
-      audio.currentTime = 0;
-      document.removeEventListener("click", handleClick);
+      if (audio) {
+          audio.pause();
+          audio.currentTime = 0;
+      }
+      document.removeEventListener("click", handleClick); // Ensure listener is removed on unmount
     };
-  }, [bgVolume]);
+  }, [bgVolume, musicStarted, bgMusicPath]); // Add bgMusicPath to dependencies
+
 
   // Listen to volume changes in localStorage
   useEffect(() => {
-    const handleStorageChange = () => {
-      const newVolume = parseInt(localStorage.getItem("bgVolume"), 10) || 0;
-      setBgVolume(newVolume);
-      if (audioRef.current) {
-        audioRef.current.volume = newVolume / 100;
-      }
+     const handleStorageChange = (event) => {
+       if (event.key === 'bgVolume') {
+            const newVolume = parseInt(event.newValue, 10) || 0;
+            setBgVolume(newVolume);
+            if (audioRef.current) {
+                audioRef.current.volume = newVolume / 100;
+            }
+       }
     };
 
     window.addEventListener("storage", handleStorageChange);
@@ -113,33 +124,34 @@ const Congtnormal = () => {
     };
   }, []);
 
-  // Ensure the game was completed before showing congratulations
   useEffect(() => {
     const gameCompleted = localStorage.getItem("gameCompleted");
-    if (!gameCompleted || gameCompleted !== "true") {
-      navigate("/Play");
+    if (gameCompleted !== "true") { // Strict check for "true"
+      console.log("Game not completed according to localStorage, redirecting.");
+      navigate("/play"); // Navigate to play if not completed
     }
   }, [navigate]);
 
   // Handlers for navigation buttons
   const handlePlayAgain = () => {
-    navigate("/medium");
+    navigate("/medium"); // Navigate to the medium game
   };
 
   const handleExit = () => {
-    localStorage.removeItem("gameCompleted");
-    navigate("/play");
+    localStorage.removeItem("gameCompleted"); // Clear the flag on exit
+    navigate("/play"); // Navigate back to the play menu
   };
 
   return (
     <PixelBox>
       <ImageContainer>
         <img
-          src={congratulationImage}
-          alt="Congratulations"
-          style={{
-            width: "100%",  // Adjust the width as you desire (e.g., 50%)
-            height: "89%", // Maintain the aspect ratio
+           src={congratulationImage} // Use absolute path
+           alt="Congratulations"
+           style={{
+            maxWidth: "80%", 
+            height: "auto", // Maintain aspect ratio
+            maxHeight: '70vh', // Limit height
           }}
         />
       </ImageContainer>

@@ -1,41 +1,148 @@
-.container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
+
+/* General page styling */
+.loginPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Ensure it takes full viewport height */
+    background: linear-gradient(135deg, #6e8efb, #a777e3); /* Example gradient background */
+    padding: 20px; /* Add padding for smaller screens */
+    box-sizing: border-box; /* Include padding in width/height calculation */
+  }
+  
+  /* Login container styling */
+  .container {
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 450px; /* Limit max width */
+    text-align: center;
+    color: #333; /* Darker text for readability */
+    box-sizing: border-box;
+  }
+  
+  /* Title styling */
+  .title {
+    margin-bottom: 25px;
+    color: #4a4e69; /* Color matching Play page */
+    font-family: 'Orbitron', sans-serif; /* Using the Orbitron font */
+    font-size: 2em; /* Larger font size */
+  }
+  
+  /* Form styling */
+  .form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Input group styling */
+  .inputGroup {
+    margin-bottom: 20px;
+    text-align: left; /* Align labels to the left */
+  }
+  
+  /* Label styling */
+  .label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #555;
+  }
+  
+  /* Input field styling */
+  .input {
+    width: 100%;
+    padding: 12px 15px; /* Increased padding */
     border: 1px solid #ccc;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-h2 {
-    text-align: center;
-}
-
-.input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-}
-
-.button {
-    padding: 10px 15px;
-    border-radius: 4px;
+    font-size: 1em; /* Standard font size */
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  
+  .input:focus {
+    border-color: #6e8efb; /* Highlight color on focus */
+    box-shadow: 0 0 5px rgba(110, 142, 251, 0.5);
+    outline: none; /* Remove default outline */
+  }
+  
+  /* Button group styling */
+  .buttonGroup {
+    display: flex;
+    justify-content: space-between; /* Space out buttons */
+    margin-top: 15px; /* Add some space above buttons */
+    gap: 15px; /* Add gap between buttons */
+  }
+  
+  /* General button styling */
+  .button {
+    padding: 12px 15px; /* Consistent padding */
+    border-radius: 8px;
     border: none;
     color: #fff;
     cursor: pointer;
-}
-
-.loginButton {
-    background-color: #007bff;
-}
-
-.registerButton {
-    background-color: #6c757d;
-}
-
-.error {
-    color: red;
+    font-size: 1em; /* Standard font size */
+    font-weight: 600;
+    flex-grow: 1; /* Make buttons take equal space */
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .button:hover {
+    transform: translateY(-2px); /* Slight lift effect on hover */
+  }
+  
+  .loginButton {
+    background-color: #6e8efb; /* Primary button color */
+  }
+  
+  .loginButton:hover {
+    background-color: #5a75e1; /* Darker shade on hover */
+  }
+  
+  .registerButton {
+    background-color: #a777e3; /* Secondary button color */
+  }
+  
+  .registerButton:hover {
+    background-color: #8e5cc7; /* Darker shade on hover */
+  }
+  
+  /* Error message styling */
+  .error {
+    color: #e74c3c; /* Clear red for errors */
     text-align: center;
-}
+    margin-top: 15px; /* Space above the error message */
+    font-size: 0.9em;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .container {
+      padding: 25px 30px;
+      max-width: 90%;
+    }
+    .title {
+      font-size: 1.8em;
+    }
+    .buttonGroup {
+      flex-direction: column; /* Stack buttons vertically on smaller screens */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .container {
+      padding: 20px 25px;
+    }
+    .title {
+      font-size: 1.5em;
+    }
+    .input {
+      padding: 10px 12px;
+    }
+    .button {
+      padding: 10px 12px;
+      font-size: 0.9em;
+    }
+  }
